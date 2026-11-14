@@ -9,7 +9,6 @@ mémoire, Blackboard, niveaux d'alerte et comportements prêts à l'emploi.
 
 [![Build](https://github.com/Ananasloll3/Sentience/actions/workflows/build.yml/badge.svg)](https://github.com/Ananasloll3/Sentience/actions/workflows/build.yml)
 [![Docs](https://img.shields.io/badge/docs-en%20ligne-7e57c2)](https://ananasloll3.github.io/Sentience/)
-[![JitPack](https://jitpack.io/v/Ananasloll3/Sentience.svg)](https://jitpack.io/#Ananasloll3/Sentience)
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.21.10-62b47a)
 ![Fabric](https://img.shields.io/badge/loader-Fabric-dbd0b4)
 [![Licence MIT](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
@@ -69,15 +68,20 @@ AgentTemplates.register(EntityType.ZOMBIE, agent -> agent
 
 ## Installation
 
-```groovy
-repositories {
-    maven { url = 'https://jitpack.io' }
-}
+Via [Cursemaven](https://cursemaven.com) ou le [Maven de Modrinth](https://support.modrinth.com/en/articles/8801191-modrinth-maven)
+une fois Sentience publié sur ces plateformes, ou depuis les sources :
 
-dependencies {
-    modImplementation "com.github.Ananasloll3:Sentience:v0.1.0"
-}
+```bash
+git clone https://github.com/Ananasloll3/Sentience.git && cd Sentience
+./gradlew publishToMavenLocal
 ```
+
+```groovy
+repositories { mavenLocal() }
+dependencies { modImplementation "com.ananasloll3:sentience:0.1.0" }
+```
+
+Détails : [installation](https://ananasloll3.github.io/Sentience/demarrage/installation/).
 
 Minecraft **1.21.10**, Fabric Loader **0.17.3+**, Fabric API, Java 21.
 [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) est optionnel.
