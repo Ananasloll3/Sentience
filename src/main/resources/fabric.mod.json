@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "sentience",
+  "version": "${version}",
+  "name": "Sentience",
+  "description": "Librairie d'IA pour moddeurs, inspirée d'Unreal Engine : perception multi-sens (ouïe réaliste, voix, vue, douleur, toucher), Blackboard, niveaux d'alerte, comportements prêts à l'emploi.",
+  "authors": ["ananasloll3"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.ananasloll3.sentience.Sentience"],
+    "voicechat": ["com.ananasloll3.sentience.impl.voice.SimpleVoiceChatPlugin"]
+  },
+  "mixins": ["sentience.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.17.3",
+    "minecraft": "~1.21.10",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "voicechat": "*"
+  },
+  "custom": {
+    "modmenu": { "badges": ["library"] }
+  }
+}

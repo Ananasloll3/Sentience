@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "sentience_testmod",
+  "version": "${version}",
+  "name": "Sentience — mobs de démo",
+  "description": "Exemples d'utilisation de Sentience : le Rôdeur (aveugle, chasse à l'oreille) et des zombies qui entendent et voient.",
+  "authors": ["ananasloll3"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.ananasloll3.sentience.testmod.SentienceTestMod"],
+    "client": ["com.ananasloll3.sentience.testmod.client.SentienceTestModClient"]
+  },
+  "depends": {
+    "sentience": "*",
+    "fabric-api": "*"
+  }
+}

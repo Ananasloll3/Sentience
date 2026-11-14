@@ -1,0 +1,88 @@
+site_name: Sentience
+site_description: Librairie d'IA pour les mods Minecraft Fabric, inspirée d'Unreal Engine
+site_author: ananasloll3
+repo_name: Sentience
+repo_url: https://github.com/Ananasloll3/Sentience
+edit_uri: edit/main/docs/
+copyright: Sentience — licence MIT
+
+theme:
+  name: material
+  language: fr
+  icon:
+    logo: material/brain
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Mode clair
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Mode sombre
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Accueil: index.md
+  - Démarrage:
+      - Installation: demarrage/installation.md
+      - Premier agent: demarrage/premier-agent.md
+      - Mobs vanilla et d'autres mods: demarrage/templates.md
+  - Concepts:
+      - L'agent: concepts/agent.md
+      - Blackboard: concepts/blackboard.md
+      - Mémoire et stimuli: concepts/memoire.md
+      - Niveaux d'alerte et comportements: concepts/alerte.md
+  - Sens:
+      - Ouïe et voix: sens/ouie.md
+      - Vue: sens/vue.md
+      - Odorat: sens/odorat.md
+      - Douleur et toucher: sens/douleur-toucher.md
+      - Communication: sens/communication.md
+  - Guides:
+      - Règles de ton mod: guides/regles.md
+      - Créer un sens: guides/sens-custom.md
+      - Créer un composant: guides/composant-custom.md
+      - Debug et outils de test: guides/debug.md
+      - Performances: guides/performances.md
+  - Mod de démo: demo.md
+  - Feuille de route: feuille-de-route.md

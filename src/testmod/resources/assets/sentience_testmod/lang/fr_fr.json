@@ -1,0 +1,10 @@
+{
+  "entity.sentience_testmod.stalker": "Rôdeur",
+  "entity.sentience_testmod.sentinel": "Sentinelle",
+  "entity.sentience_testmod.hound": "Flaireur",
+  "entity.sentience_testmod.apex": "Abomination",
+  "item.sentience_testmod.stalker_spawn_egg": "Œuf d'apparition de Rôdeur",
+  "item.sentience_testmod.sentinel_spawn_egg": "Œuf d'apparition de Sentinelle",
+  "item.sentience_testmod.hound_spawn_egg": "Œuf d'apparition de Flaireur",
+  "item.sentience_testmod.apex_spawn_egg": "Œuf d'apparition d'Abomination"
+}

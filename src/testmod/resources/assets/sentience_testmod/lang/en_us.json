@@ -1,0 +1,10 @@
+{
+  "entity.sentience_testmod.stalker": "Stalker",
+  "entity.sentience_testmod.sentinel": "Sentinel",
+  "entity.sentience_testmod.hound": "Hound",
+  "entity.sentience_testmod.apex": "Abomination",
+  "item.sentience_testmod.stalker_spawn_egg": "Stalker Spawn Egg",
+  "item.sentience_testmod.sentinel_spawn_egg": "Sentinel Spawn Egg",
+  "item.sentience_testmod.hound_spawn_egg": "Hound Spawn Egg",
+  "item.sentience_testmod.apex_spawn_egg": "Abomination Spawn Egg"
+}

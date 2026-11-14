@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ananasloll3.sentience.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["EntityMixin", "MobEntityAccessor", "MobEntityMixin", "ServerWorldMixin"],
+  "injectors": { "defaultRequire": 1 }
+}
