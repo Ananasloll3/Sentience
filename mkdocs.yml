@@ -2,6 +2,7 @@ site_name: Sentience
 site_description: Librairie d'IA pour les mods Minecraft Fabric, inspirée d'Unreal Engine
 site_author: ananasloll3
 repo_name: Sentience
+site_url: https://ananasloll3.github.io/Sentience/
 repo_url: https://github.com/Ananasloll3/Sentience
 edit_uri: edit/main/docs/
 copyright: Sentience — licence MIT
