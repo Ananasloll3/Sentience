@@ -39,6 +39,77 @@ theme:
     - content.code.annotate
     - content.tabs.link
 
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: fr
+          default: true
+          name: Français
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_description: AI library for Minecraft Fabric mods, inspired by Unreal Engine
+          nav_translations:
+            Accueil: Home
+            Démarrage: Getting started
+            Installation: Installation
+            Premier agent: First agent
+            Mobs vanilla et d'autres mods: Vanilla and other mods' mobs
+            Concepts: Concepts
+            L'agent: The agent
+            Blackboard: Blackboard
+            Mémoire et stimuli: Memory and stimuli
+            Niveaux d'alerte et comportements: Alert levels and behaviours
+            Sens: Senses
+            Ouïe et voix: Hearing and voice
+            Vue: Sight
+            Odorat: Smell
+            Douleur et toucher: Pain and touch
+            Communication: Communication
+            Guides: Guides
+            Règles de ton mod: Your mod's rules
+            Créer un sens: Create a sense
+            Créer un composant: Create a component
+            Debug et outils de test: Debug and test tools
+            Performances: Performance
+            Mod de démo: Demo mod
+            Feuille de route: Roadmap
+        - locale: zh
+          name: 中文
+          build: true
+          site_description: 受虚幻引擎启发的 Minecraft Fabric 模组 AI 库
+          nav_translations:
+            Accueil: 首页
+            Démarrage: 入门
+            Installation: 安装
+            Premier agent: 第一个智能体
+            Mobs vanilla et d'autres mods: 原版生物与其他模组的生物
+            Concepts: 核心概念
+            L'agent: 智能体
+            Blackboard: 黑板
+            Mémoire et stimuli: 记忆与刺激
+            Niveaux d'alerte et comportements: 警觉等级与行为
+            Sens: 感官
+            Ouïe et voix: 听觉与语音
+            Vue: 视觉
+            Odorat: 嗅觉
+            Douleur et toucher: 痛觉与触觉
+            Communication: 通信
+            Guides: 指南
+            Règles de ton mod: 你的模组规则
+            Créer un sens: 创建感官
+            Créer un composant: 创建组件
+            Debug et outils de test: 调试与测试工具
+            Performances: 性能
+            Mod de démo: 演示模组
+            Feuille de route: 路线图
+
 markdown_extensions:
   - admonition
   - attr_list

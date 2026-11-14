@@ -13,7 +13,7 @@ mémoire, Blackboard, niveaux d'alerte et comportements prêts à l'emploi.
 ![Fabric](https://img.shields.io/badge/loader-Fabric-dbd0b4)
 [![Licence MIT](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
 
-[**📖 Documentation**](https://ananasloll3.github.io/Sentience/) ·
+[**📖 Documentation**](https://ananasloll3.github.io/Sentience/) ([English](https://ananasloll3.github.io/Sentience/en/) · [中文](https://ananasloll3.github.io/Sentience/zh/)) ·
 [Démarrage rapide](https://ananasloll3.github.io/Sentience/demarrage/premier-agent/) ·
 [Mod de démo](https://ananasloll3.github.io/Sentience/demo/) ·
 [Versions](https://github.com/Ananasloll3/Sentience/releases)
