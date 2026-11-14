@@ -2,62 +2,62 @@
 
 # 🧠 Sentience
 
-**Des IA qui perçoivent vraiment le monde, pour tes mods Minecraft.**
+**AI that truly perceives the world, for your Minecraft mods.**
 
-Librairie Fabric inspirée des outils d'IA d'Unreal Engine : perception multi-sens réaliste,
-mémoire, Blackboard, niveaux d'alerte et comportements prêts à l'emploi.
+A Fabric library inspired by Unreal Engine's AI tools: realistic multi-sense perception,
+memory, Blackboard, alert levels and ready-to-use behaviours.
 
 [![Build](https://github.com/Ananasloll3/Sentience/actions/workflows/build.yml/badge.svg)](https://github.com/Ananasloll3/Sentience/actions/workflows/build.yml)
-[![Docs](https://img.shields.io/badge/docs-en%20ligne-7e57c2)](https://ananasloll3.github.io/Sentience/)
+[![Docs](https://img.shields.io/badge/docs-online-7e57c2)](https://ananasloll3.github.io/Sentience/en/)
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.21.10-62b47a)
 ![Fabric](https://img.shields.io/badge/loader-Fabric-dbd0b4)
-[![Licence MIT](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-[**📖 Documentation**](https://ananasloll3.github.io/Sentience/) ([English](https://ananasloll3.github.io/Sentience/en/) · [中文](https://ananasloll3.github.io/Sentience/zh/)) ·
-[Démarrage rapide](https://ananasloll3.github.io/Sentience/demarrage/premier-agent/) ·
-[Mod de démo](https://ananasloll3.github.io/Sentience/demo/) ·
-[Versions](https://github.com/Ananasloll3/Sentience/releases)
+[**📖 Documentation**](https://ananasloll3.github.io/Sentience/en/) ([Français](https://ananasloll3.github.io/Sentience/) · [中文](https://ananasloll3.github.io/Sentience/zh/)) ·
+[Quick start](https://ananasloll3.github.io/Sentience/en/demarrage/premier-agent/) ·
+[Demo mod](https://ananasloll3.github.io/Sentience/en/demo/) ·
+[Releases](https://github.com/Ananasloll3/Sentience/releases)
 
-![Les créatures du mod de démo](docs/assets/mobs.png)
+![The demo mod's creatures](docs/assets/mobs.png)
 
 </div>
 
-## Pourquoi Sentience ?
+## Why Sentience?
 
-Les mobs vanilla te repèrent à travers les murs et foncent droit sur toi. Avec Sentience, une créature
-**ne connaît jamais ta vraie position** : elle entend un bruit, devine d'où il vient, va voir, fouille,
-te piste… et peut se tromper. Tu peux te cacher, te taire, marcher accroupi, profiter de la pluie,
-couper ta piste en traversant une rivière.
+Vanilla mobs spot you through walls and charge straight at you. With Sentience, a creature
+**never knows your real position**: it hears a noise, guesses where it came from, goes to check,
+searches, tracks you… and can be wrong. You can hide, stay quiet, sneak, use the rain,
+break your trail by crossing a river.
 
 | | |
 |---|---|
-| 👂 **Ouïe physique** | Tous les sons du jeu, propagés avec atténuation, murs, matériaux et bruit de fond. La **voix** des joueurs via Simple Voice Chat. |
-| 👁 **Vue crédible** | Cône de vision, périphérie floue, obscurité, discrétion, camouflage, jauge de détection progressive. |
-| 👃 **Odorat** | Pistes que l'eau coupe et que la pluie efface ; le sang attire ; l'odeur ne traverse pas les murs. |
-| ⚔ **Douleur & toucher** | Être frappé ou frôlé révèle la position. |
-| 📣 **Communication** | Les agents se transmettent ce qu'ils savent. |
-| 🧠 **Mémoire & alerte** | Fusion des perceptions, incertitude, oubli ; méfiant → va voir → chasse. |
-| 🎛 **Règles par mod** | Chaque mod règle la physique de la perception pour ses propres mobs, sans conflit. |
-| 🧩 **Extensible** | Sens, composants, bruits, odeurs et camouflages personnalisés. |
-| ⚡ **Performant** | Niveau de détail automatique, calculs coûteux seulement quand c'est utile. |
+| 👂 **Physical hearing** | Every game sound, propagated with attenuation, walls, materials and background noise. Players' **voice** through Simple Voice Chat. |
+| 👁 **Believable sight** | Vision cone, blurry periphery, darkness, sneaking, camouflage, progressive detection meter. |
+| 👃 **Smell** | Trails that water breaks and rain washes away; blood attracts; scent doesn't go through walls. |
+| ⚔ **Pain & touch** | Being hit or brushed against reveals your position. |
+| 📣 **Communication** | Agents share what they know. |
+| 🧠 **Memory & alert** | Perception fusion, uncertainty, forgetting; suspicious → investigate → hunt. |
+| 🎛 **Per-mod rules** | Each mod tunes the physics of perception for its own mobs, without conflicts. |
+| 🧩 **Extensible** | Custom senses, components, noises, scents and camouflage. |
+| ⚡ **Fast** | Automatic level of detail, expensive work only when it matters. |
 
-## En dix lignes
+## In ten lines
 
 ```java
 @Override
 protected void initGoals() {
     Agent agent = Agent.builder(this)
-            .hearing(HearingProfile.KEEN)        // ouïe + micro
-            .sight(SightConfig.nocturnal())      // vue
-            .scent(ScentSense.hound())           // odorat
-            .damage().touch()                    // douleur, toucher
-            .awareness(AwarenessProfile.DEFAULT) // méfiant → va voir → chasse
-            .defaultGoals(2, 0.9, 1.4)           // écouter, aller voir, fouiller, chasser
+            .hearing(HearingProfile.KEEN)        // hearing + microphone
+            .sight(SightConfig.nocturnal())      // sight
+            .scent(ScentSense.hound())           // smell
+            .damage().touch()                    // pain, touch
+            .awareness(AwarenessProfile.DEFAULT) // suspicious → investigate → hunt
+            .defaultGoals(2, 0.9, 1.4)           // listen, investigate, search, hunt
             .build();
 }
 ```
 
-Un mob vanilla ou d'un autre mod, sans toucher à son code :
+A vanilla mob or another mod's mob, without touching its code:
 
 ```java
 AgentTemplates.register(EntityType.ZOMBIE, agent -> agent
@@ -68,8 +68,8 @@ AgentTemplates.register(EntityType.ZOMBIE, agent -> agent
 
 ## Installation
 
-Via [Cursemaven](https://cursemaven.com) ou le [Maven de Modrinth](https://support.modrinth.com/en/articles/8801191-modrinth-maven)
-une fois Sentience publié sur ces plateformes, ou depuis les sources :
+Through [Cursemaven](https://cursemaven.com) or the [Modrinth Maven](https://support.modrinth.com/en/articles/8801191-modrinth-maven)
+once Sentience is published on these platforms, or from source:
 
 ```bash
 git clone https://github.com/Ananasloll3/Sentience.git && cd Sentience
@@ -81,48 +81,48 @@ repositories { mavenLocal() }
 dependencies { modImplementation "com.ananasloll3:sentience:0.1.0" }
 ```
 
-Détails : [installation](https://ananasloll3.github.io/Sentience/demarrage/installation/).
+Details: [installation](https://ananasloll3.github.io/Sentience/en/demarrage/installation/).
 
 Minecraft **1.21.10**, Fabric Loader **0.17.3+**, Fabric API, Java 21.
-[Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) est optionnel.
+[Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) is optional.
 
-➡️ Tout le reste est dans la [**documentation**](https://ananasloll3.github.io/Sentience/).
+➡️ Everything else is in the [**documentation**](https://ananasloll3.github.io/Sentience/en/).
 
-## Mod de démo
+## Demo mod
 
 ```bash
 ./gradlew runTestmodClient
 ```
 
-Quatre créatures, chacune centrée sur un sens — le **Rôdeur** (aveugle), la **Sentinelle** (sourde),
-le **Flaireur** (odorat) et l'**Abomination** (tout à la fois) — plus des zombies vanilla améliorés,
-et une map d'arènes de test disponible dans les [versions](https://github.com/Ananasloll3/Sentience/releases).
-`/sentience debug` montre ce que pense chaque créature.
+Four creatures, each focused on one sense — the **Stalker** (blind), the **Sentinel** (deaf),
+the **Hound** (smell) and the **Abomination** (everything at once) — plus improved vanilla zombies,
+and a test arena map available in the [releases](https://github.com/Ananasloll3/Sentience/releases).
+`/sentience debug` shows what each creature is thinking.
 
-## Développement
+## Development
 
-| Commande | Effet |
+| Command | Effect |
 |---|---|
-| `./gradlew build` | compile la librairie et le mod de démo |
-| `./gradlew runTestmodClient` | lance le jeu avec le mod de démo |
-| `./gradlew publishToMavenLocal` | publie dans ton Maven local |
-| `pip install mkdocs-material && mkdocs serve` | documentation en local |
+| `./gradlew build` | builds the library and the demo mod |
+| `./gradlew runTestmodClient` | launches the game with the demo mod |
+| `./gradlew publishToMavenLocal` | publishes to your local Maven |
+| `pip install mkdocs-material mkdocs-static-i18n && mkdocs serve` | local documentation |
 
 ```
-src/main      la librairie (api/ public et stable, impl/ interne)
-src/testmod   le mod de démo, jamais publié
-docs/         la documentation (MkDocs Material)
+src/main      the library (api/ public and stable, impl/ internal)
+src/testmod   the demo mod, never published
+docs/         the documentation (MkDocs Material, FR / EN / 中文)
 ```
 
-## Feuille de route
+## Roadmap
 
-- [x] Agent, Blackboard, niveau de détail, debug
-- [x] Ouïe, voix, vue, odorat, douleur, toucher, communication
-- [x] Règles par mod
-- [ ] Behavior Trees en JSON
-- [ ] Navigation v2 (A* asynchrone, portes, échelles, sauts)
-- [ ] EQS, escouades, Director
+- [x] Agent, Blackboard, level of detail, debug
+- [x] Hearing, voice, sight, smell, pain, touch, communication
+- [x] Per-mod rules
+- [ ] Behavior Trees in JSON
+- [ ] Navigation v2 (async A*, doors, ladders, jumps)
+- [ ] EQS, squads, Director
 
-## Licence
+## License
 
-[MIT](LICENSE) — utilise Sentience dans tes mods, libres ou non.
+[MIT](LICENSE) — use Sentience in your mods, open source or not.
