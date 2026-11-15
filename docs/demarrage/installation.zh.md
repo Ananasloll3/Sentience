@@ -29,7 +29,7 @@ Sentience 在 CurseForge 或 Modrinth 上发布后，这些平台会将其作为
     }
 
     dependencies {
-        modImplementation "maven.modrinth:sentience:0.1.0"
+        modImplementation "maven.modrinth:sentience:0.2.0"
     }
     ```
 
@@ -37,7 +37,7 @@ Sentience 在 CurseForge 或 Modrinth 上发布后，这些平台会将其作为
 
 ```json
 "depends": {
-  "sentience": ">=0.1.0"
+  "sentience": ">=0.2.0"
 }
 ```
 
@@ -54,7 +54,7 @@ cd Sentience
 ```
 
 然后在你的项目中使用：`repositories { mavenLocal() }` 和
-`modImplementation "com.ananasloll3:sentience:0.1.0"`。
+`modImplementation "com.ananasloll3:sentience:0.2.0"`。
 
 ## Simple Voice Chat（可选）
 

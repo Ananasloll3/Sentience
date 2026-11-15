@@ -6,5 +6,7 @@
   "item.sentience_testmod.stalker_spawn_egg": "Œuf d'apparition de Rôdeur",
   "item.sentience_testmod.sentinel_spawn_egg": "Œuf d'apparition de Sentinelle",
   "item.sentience_testmod.hound_spawn_egg": "Œuf d'apparition de Flaireur",
-  "item.sentience_testmod.apex_spawn_egg": "Œuf d'apparition d'Abomination"
+  "item.sentience_testmod.apex_spawn_egg": "Œuf d'apparition d'Abomination",
+  "entity.sentience_testmod.hunter": "Chasseur",
+  "item.sentience_testmod.hunter_spawn_egg": "Œuf d'apparition de Chasseur"
 }

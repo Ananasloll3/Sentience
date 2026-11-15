@@ -21,6 +21,13 @@ public final class BlackboardKeys {
     /** Entité actuellement vue avec certitude par la vue. */
     public static final BlackboardKey<UUID> VISIBLE_TARGET = key("visible_target", UUID.class);
 
+    /** Résultat par défaut des requêtes d'environnement (EQS) lancées par un Behavior Tree. */
+    public static final BlackboardKey<Vec3d> QUERY_RESULT = key("query_result", Vec3d.class);
+
+    /** Force le chargement des clés standard (appelé par Sentience). */
+    public static void bootstrap() {
+    }
+
     private BlackboardKeys() {
     }
 

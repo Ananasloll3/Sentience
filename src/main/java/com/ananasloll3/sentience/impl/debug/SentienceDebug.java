@@ -18,6 +18,10 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.particle.ParticleTypes;
+import com.ananasloll3.sentience.api.behavior.BehaviorTreeComponent;
+import com.ananasloll3.sentience.api.query.QueryResult;
+import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -123,10 +127,37 @@ public final class SentienceDebug {
             text.append(Text.literal(String.format("  👁%.0f%%", sight.getHighestDetection() * 100f))
                     .formatted(Formatting.AQUA));
         }
+        BehaviorTreeComponent tree = agent.find(BehaviorTreeComponent.class);
+        if (tree != null) {
+            List<String> path = tree.activePath();
+            if (!path.isEmpty()) {
+                text.append(Text.literal("  ▶ " + path.getLast()).formatted(Formatting.LIGHT_PURPLE));
+            }
+        }
         if (agent.thinkInterval() > 1) {
             text.append(Text.literal("  LOD/" + agent.thinkInterval()).formatted(Formatting.DARK_GRAY));
         }
         return text;
+    }
+
+    // ------------------------------------------------------------------ requêtes d'environnement
+
+    /** Montre les points évalués : verts = retenus (le meilleur en gros), gris = éliminés. */
+    public static void onQuery(ServerWorld world, List<Vec3d> evaluated, QueryResult result) {
+        if (!enabled) {
+            return;
+        }
+        java.util.Set<Vec3d> kept = new java.util.HashSet<>();
+        result.points().forEach(p -> kept.add(p.pos()));
+        DustParticleEffect rejected = new DustParticleEffect(0x777777, 0.8f);
+        DustParticleEffect retained = new DustParticleEffect(0x55FF55, 1.0f);
+        for (Vec3d p : evaluated) {
+            world.spawnParticles(kept.contains(p) ? retained : rejected, p.x, p.y + 0.2, p.z, 2, 0.05, 0.05, 0.05, 0.0);
+        }
+        Vec3d best = result.best();
+        if (best != null) {
+            world.spawnParticles(ParticleTypes.HAPPY_VILLAGER, best.x, best.y + 0.5, best.z, 12, 0.25, 0.4, 0.25, 0.0);
+        }
     }
 
     private static String senseIcon(SenseType sense) {

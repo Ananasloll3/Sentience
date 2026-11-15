@@ -37,6 +37,8 @@ break your trail by crossing a river.
 | ⚔ **Pain & touch** | Being hit or brushed against reveals your position. |
 | 📣 **Communication** | Agents share what they know. |
 | 🧠 **Memory & alert** | Perception fusion, uncertainty, forgetting; suspicious → investigate → hunt. |
+| 🌳 **Behavior Trees** | Describe behaviour as a tree, in JSON (hot-reloaded with `/reload`) or Java: sequences, selectors, decorators with aborts, services. |
+| 🗺 **Environment queries (EQS)** | Find a hiding spot, cover, a flanking point or an escape route, from generated and scored points. |
 | 🎛 **Per-mod rules** | Each mod tunes the physics of perception for its own mobs, without conflicts. |
 | 🧩 **Extensible** | Custom senses, components, noises, scents and camouflage. |
 | ⚡ **Fast** | Automatic level of detail, expensive work only when it matters. |
@@ -55,6 +57,14 @@ protected void initGoals() {
             .defaultGoals(2, 0.9, 1.4)           // listen, investigate, search, hunt
             .build();
 }
+```
+
+Or let a Behavior Tree drive it, written in JSON and hot-reloaded with `/reload`:
+
+```java
+Agent.builder(this).hearing(HearingProfile.DEFAULT).sight(SightConfig.humanoid())
+        .behaviorTree(Identifier.of("mymod", "guard"), 1)   // data/mymod/sentience/behavior_tree/guard.json
+        .build();
 ```
 
 A vanilla mob or another mod's mob, without touching its code:
@@ -78,7 +88,7 @@ git clone https://github.com/Ananasloll3/Sentience.git && cd Sentience
 
 ```groovy
 repositories { mavenLocal() }
-dependencies { modImplementation "com.ananasloll3:sentience:0.1.0" }
+dependencies { modImplementation "com.ananasloll3:sentience:0.2.0" }
 ```
 
 Details: [installation](https://ananasloll3.github.io/Sentience/en/demarrage/installation/).
@@ -95,7 +105,8 @@ Minecraft **1.21.10**, Fabric Loader **0.17.3+**, Fabric API, Java 21.
 ```
 
 Four creatures, each focused on one sense — the **Stalker** (blind), the **Sentinel** (deaf),
-the **Hound** (smell) and the **Abomination** (everything at once) — plus improved vanilla zombies,
+the **Hound** (smell) and the **Abomination** (everything at once) — the **Hunter**, driven entirely
+by a JSON Behavior Tree and environment queries, plus improved vanilla zombies,
 and a test arena map available in the [releases](https://github.com/Ananasloll3/Sentience/releases).
 `/sentience debug` shows what each creature is thinking.
 
@@ -119,9 +130,9 @@ docs/         the documentation (MkDocs Material, FR / EN / 中文)
 - [x] Agent, Blackboard, level of detail, debug
 - [x] Hearing, voice, sight, smell, pain, touch, communication
 - [x] Per-mod rules
-- [ ] Behavior Trees in JSON
+- [x] Behavior Trees in JSON, environment queries (EQS), multiple templates per mob type — 0.2.0
 - [ ] Navigation v2 (async A*, doors, ladders, jumps)
-- [ ] EQS, squads, Director
+- [ ] Squads, Director, client debug overlay
 
 ## License
 

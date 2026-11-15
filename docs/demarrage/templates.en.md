@@ -19,9 +19,22 @@ public void onInitialize() {
 Sentience's behaviours are added to the mob's own: a zombie keeps its vanilla attack
 (priority 2) and uses "investigate" (priority 3) when it has no target.
 
-!!! warning "One template per type"
-    If two mods register a template for the same type, the last one registered wins.
-    For your own mobs, build the agent inside the mob itself instead.
+## Several templates for the same type
+
+Several mods can target the same type: their templates are **combined** on the same agent,
+by increasing priority (then in registration order).
+
+```java
+// Another mod adds smell to zombies, without removing hearing and sight
+AgentTemplates.register(EntityType.ZOMBIE, 10, agent -> agent
+        .scent(ScentSense.hound().only(p -> p.kind().equals(ScentTrails.BLOOD))));
+```
+
+- senses and components **add up**;
+- a sense or component **of the same class** is replaced by the one from the highest-priority template;
+- so are the rules, the alert, the default behaviours and the Behavior Tree.
+
+For your own mobs, build the agent directly in the mob instead.
 
 ## Entities without an agent
 

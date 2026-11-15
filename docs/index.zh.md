@@ -58,6 +58,14 @@ Sentience 是一个受虚幻引擎 AI 工具启发的 Fabric 库（Minecraft 1.2
 
     [:octicons-arrow-right-24: 规则](guides/regles.md)
 
+-   :material-file-tree: **行为树与 EQS**
+
+    ---
+
+    用 JSON 描述行为，用 `/reload` 重新加载。环境查询可以找到藏身处、掩体或包抄目标的位置。
+
+    [:octicons-arrow-right-24: 行为树](decision/behavior-trees.md)
+
 -   :material-puzzle: **可扩展**
 
     ---

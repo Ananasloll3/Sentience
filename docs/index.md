@@ -59,6 +59,15 @@ des sens réalistes, une mémoire, un Blackboard et des niveaux d'alerte, avec d
 
     [:octicons-arrow-right-24: Règles](guides/regles.md)
 
+-   :material-file-tree: **Behavior Trees et EQS**
+
+    ---
+
+    Décris le comportement en JSON, recharge-le avec `/reload`. Les requêtes d'environnement trouvent
+    une cachette, un abri ou un point pour contourner la cible.
+
+    [:octicons-arrow-right-24: Behavior Trees](decision/behavior-trees.md)
+
 -   :material-puzzle: **Extensible**
 
     ---

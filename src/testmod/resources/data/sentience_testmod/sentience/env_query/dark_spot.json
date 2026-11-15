@@ -1,0 +1,9 @@
+{
+  "generator": { "type": "ring", "center": "querier", "radius": [4, 14], "rings": 3, "points": 10 },
+  "tests": [
+    { "type": "light", "max": 9, "weight": 2, "prefer": "low" },
+    { "type": "distance", "target": "querier", "weight": 0.5, "prefer": "high" },
+    { "type": "random", "weight": 1 }
+  ],
+  "pathable": true
+}

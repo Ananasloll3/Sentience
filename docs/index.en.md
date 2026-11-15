@@ -59,6 +59,15 @@ realistic senses, a memory, a Blackboard and alert levels, with ready-to-use beh
 
     [:octicons-arrow-right-24: Rules](guides/regles.md)
 
+-   :material-file-tree: **Behavior Trees and EQS**
+
+    ---
+
+    Describe behaviour in JSON, reload it with `/reload`. Environment queries find
+    a hiding spot, cover or a way to flank the target.
+
+    [:octicons-arrow-right-24: Behavior Trees](decision/behavior-trees.md)
+
 -   :material-puzzle: **Extensible**
 
     ---

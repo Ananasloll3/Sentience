@@ -2,6 +2,9 @@ package com.ananasloll3.sentience.api.blackboard;
 
 import net.minecraft.util.Identifier;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Clé typée du {@link Blackboard}. Deux clés sont égales si elles ont le même identifiant.
  *
@@ -11,8 +14,21 @@ import net.minecraft.util.Identifier;
  */
 public record BlackboardKey<T>(Identifier id, Class<T> type) {
 
+    private static final Map<Identifier, BlackboardKey<?>> KNOWN = new ConcurrentHashMap<>();
+
     public static <T> BlackboardKey<T> of(Identifier id, Class<T> type) {
-        return new BlackboardKey<>(id, type);
+        BlackboardKey<T> key = new BlackboardKey<>(id, type);
+        KNOWN.putIfAbsent(id, key);
+        return key;
+    }
+
+    /**
+     * Clé déjà déclarée avec cet identifiant, ou une clé non typée sinon. Utilisé par les fichiers JSON
+     * (Behavior Trees, requêtes) qui désignent les clés par leur identifiant.
+     */
+    public static BlackboardKey<?> byId(Identifier id) {
+        BlackboardKey<?> known = KNOWN.get(id);
+        return known != null ? known : new BlackboardKey<>(id, Object.class);
     }
 
     @Override

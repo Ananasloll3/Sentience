@@ -1,0 +1,68 @@
+{
+  "root": {
+    "type": "selector",
+    "children": [
+      {
+        "name": "se cacher",
+        "type": "sequence",
+        "decorators": [
+          { "type": "health", "below": 0.35, "abort": "lower" },
+          { "type": "cooldown", "ticks": 400 }
+        ],
+        "children": [
+          { "type": "play_sound", "sound": "minecraft:entity.pillager.celebrate", "pitch": 0.6 },
+          { "type": "run_query", "query": "sentience:hide", "result": "sentience_testmod:hide_spot" },
+          { "type": "move_to", "target": "sentience_testmod:hide_spot", "speed": 1.4, "timeout": 200 },
+          { "type": "wait", "ticks": 80, "deviation": 20 }
+        ]
+      },
+      {
+        "name": "combattre",
+        "type": "selector",
+        "decorators": [ { "type": "sees_target", "abort": "both" } ],
+        "services": [ { "type": "share_focus", "range": 32, "interval": 40 } ],
+        "children": [
+          {
+            "name": "contourner",
+            "type": "sequence",
+            "decorators": [
+              { "type": "distance", "target": "visible_target", "above": 5 },
+              { "type": "cooldown", "ticks": 160 }
+            ],
+            "children": [
+              { "type": "run_query", "query": "sentience:flank", "result": "sentience_testmod:flank_spot" },
+              { "type": "move_to", "target": "sentience_testmod:flank_spot", "speed": 1.3, "timeout": 100 }
+            ]
+          },
+          { "type": "attack", "target": "visible_target", "speed": 1.35, "cooldown": 20 }
+        ]
+      },
+      {
+        "name": "aller voir",
+        "type": "sequence",
+        "decorators": [ { "type": "awareness", "at_least": "investigate", "abort": "lower" } ],
+        "children": [
+          { "type": "move_to", "target": "focus_position", "speed": 1.1, "timeout": 300 },
+          { "type": "search", "target": "focus_position", "radius": 6, "ticks": 160 },
+          { "type": "give_up" }
+        ]
+      },
+      {
+        "name": "écouter",
+        "type": "look_at",
+        "target": "focus_position",
+        "ticks": 40,
+        "decorators": [ { "type": "awareness", "is": "suspicious", "abort": "lower" } ]
+      },
+      {
+        "name": "patrouiller",
+        "type": "sequence",
+        "children": [
+          { "type": "run_query", "query": "sentience_testmod:dark_spot", "result": "sentience_testmod:patrol_spot" },
+          { "type": "move_to", "target": "sentience_testmod:patrol_spot", "speed": 0.7, "timeout": 300 },
+          { "type": "wait", "ticks": 60, "deviation": 30 }
+        ]
+      }
+    ]
+  }
+}

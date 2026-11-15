@@ -3,6 +3,9 @@ package com.ananasloll3.sentience.api.agent;
 import com.ananasloll3.sentience.Sentience;
 import com.ananasloll3.sentience.api.awareness.AwarenessComponent;
 import com.ananasloll3.sentience.api.awareness.AwarenessProfile;
+import com.ananasloll3.sentience.api.behavior.BehaviorTree;
+import com.ananasloll3.sentience.api.behavior.BehaviorTreeComponent;
+import com.ananasloll3.sentience.api.behavior.BehaviorTreeGoal;
 import com.ananasloll3.sentience.api.goal.InvestigateGoal;
 import com.ananasloll3.sentience.api.goal.ListenGoal;
 import com.ananasloll3.sentience.api.perception.DamageSense;
@@ -20,6 +23,7 @@ import com.ananasloll3.sentience.mixin.MobEntityAccessor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,9 @@ public final class AgentBuilder {
     private double walkSpeed = 1.0;
     private double runSpeed = 1.3;
     private int searchTicks = 240;
+
+    private BehaviorTreeComponent behaviorTree;
+    private int treePriority;
 
     AgentBuilder(MobEntity mob) {
         this.mob = mob;
@@ -66,17 +73,17 @@ public final class AgentBuilder {
 
     /** @param interest intérêt (0 = ignoré) porté à chaque bruit, pour filtrer ou prioriser */
     public AgentBuilder hearing(HearingProfile profile, ToDoubleBiFunction<Agent, NoiseEvent> interest) {
-        senses.add(new HearingSense(profile, interest));
+        addSense(new HearingSense(profile, interest));
         return this;
     }
 
     public AgentBuilder sight(SightConfig config) {
-        senses.add(new SightSense(config));
+        addSense(new SightSense(config));
         return this;
     }
 
     public AgentBuilder damage() {
-        senses.add(new DamageSense());
+        addSense(new DamageSense());
         return this;
     }
 
@@ -85,20 +92,26 @@ public final class AgentBuilder {
     }
 
     public AgentBuilder touch(Predicate<LivingEntity> targets) {
-        senses.add(new TouchSense(targets));
+        addSense(new TouchSense(targets));
         return this;
     }
 
     /** Odorat : suit les pistes laissées par les joueurs. */
     public AgentBuilder scent(ScentSense sense) {
-        senses.add(sense);
+        addSense(sense);
         return this;
     }
 
     /** Sens personnalisé (écholocation, détection de chaleur…). */
     public AgentBuilder sense(SenseModule sense) {
-        senses.add(sense);
+        addSense(sense);
         return this;
+    }
+
+    /** Un seul sens de chaque classe : le dernier ajouté remplace le précédent (utile pour combiner des modèles). */
+    private void addSense(SenseModule sense) {
+        senses.removeIf(existing -> existing.getClass() == sense.getClass());
+        senses.add(sense);
     }
 
     /** Taille et durée de la mémoire perceptive (8 souvenirs, 30 s par défaut). */
@@ -139,9 +152,30 @@ public final class AgentBuilder {
         return this;
     }
 
-    /** Composant personnalisé, exécuté après la perception et l'alerte. */
+    /**
+     * Composant personnalisé, exécuté après la perception et l'alerte. Un seul composant de chaque
+     * classe : le dernier ajouté remplace le précédent.
+     */
     public AgentBuilder component(AgentComponent component) {
+        components.removeIf(existing -> existing.getClass() == component.getClass());
         components.add(component);
+        return this;
+    }
+
+    /**
+     * Comportement décrit par un Behavior Tree (Java ou datapack, rechargé par {@code /reload}).
+     * Il est exécuté par un goal de priorité {@code priority} qui prend le mouvement et le regard.
+     */
+    public AgentBuilder behaviorTree(Identifier treeId, int priority) {
+        this.behaviorTree = new BehaviorTreeComponent(treeId);
+        this.treePriority = priority;
+        return this;
+    }
+
+    /** Comportement décrit par un Behavior Tree Java. Un arbre JSON de même identifiant le remplace. */
+    public AgentBuilder behaviorTree(BehaviorTree tree, int priority) {
+        this.behaviorTree = new BehaviorTreeComponent(tree);
+        this.treePriority = priority;
         return this;
     }
 
@@ -160,6 +194,9 @@ public final class AgentBuilder {
             all.add(new AwarenessComponent(awareness));
         }
         all.addAll(components);
+        if (behaviorTree != null) {
+            all.add(behaviorTree);
+        }
 
         Agent previous = Agent.of(mob);
         if (previous != null) {
@@ -174,6 +211,9 @@ public final class AgentBuilder {
             var goals = ((MobEntityAccessor) mob).sentience$getGoalSelector();
             goals.add(goalPriority, new InvestigateGoal(agent, walkSpeed, runSpeed, searchTicks));
             goals.add(goalPriority + 1, new ListenGoal(agent));
+        }
+        if (behaviorTree != null) {
+            ((MobEntityAccessor) mob).sentience$getGoalSelector().add(treePriority, new BehaviorTreeGoal(mob, behaviorTree));
         }
 
         // Construit après l'apparition (ex. : modèle appliqué à un mob déjà chargé)

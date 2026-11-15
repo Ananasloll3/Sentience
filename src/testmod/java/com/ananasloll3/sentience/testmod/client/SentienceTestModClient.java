@@ -18,6 +18,9 @@ public final class SentienceTestModClient implements ClientModInitializer {
         EntityRendererRegistry.register(SentienceTestMod.HOUND, HoundRenderer::new);
         EntityRendererRegistry.register(SentienceTestMod.APEX, ctx -> new BipedAgentRenderer<>(ctx,
                 EntityModelLayers.ZOMBIE, tex("apex"), tex("apex_eyes"), 1.2f, 1.38f, 0.8f));
+        EntityRendererRegistry.register(SentienceTestMod.HUNTER, ctx -> new BipedAgentRenderer<>(ctx,
+                EntityModelLayers.ZOMBIE, Identifier.ofVanilla("textures/entity/zombie/husk.png"),
+                tex("sentinel_eyes"), 1f, 1f, 0.5f));
     }
 
     private static Identifier tex(String name) {

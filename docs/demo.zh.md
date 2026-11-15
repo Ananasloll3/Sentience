@@ -17,7 +17,8 @@
 | **哨兵（Sentinel）** | 失聪且静止：只有视觉。向真正看到的目标射击，敲响所有生物都能听到的警钟，并用无线电通知盟友 |
 | **猎犬（Hound）** | 嗅觉：一步步沿着你的踪迹追踪。它的规则：雨不会冲淡踪迹 |
 | **憎恶体（Abomination）** | 全部感官 + 一个自定义组件（怕光）+ 一个读取黑板的 goal；开始追猎时会通知其他生物 |
-| **僵尸**（原版） | 对玩家和村民的听觉与视觉，通过 `AgentTemplates` 添加 |
+| **猎手（Hunter）** | 全部行为都是一个 [JSON 行为树](decision/behavior-trees.md)：在暗处巡逻、包抄猎物、受伤时躲藏（[环境查询](decision/eqs.md)）、通知同类 |
+| **僵尸**（原版） | 对玩家和村民的听觉与视觉，外加第二个模板让它们能闻到血腥味（两个 `AgentTemplates` 合并） |
 
 演示模组有**自己的规则**：头戴雕刻南瓜可以对它的生物起到伪装作用。
 僵尸使用默认规则——南瓜骗不了它们。
@@ -35,3 +36,7 @@
 | **憎恶体** | 黑暗的房子，每个房间一盏灯和一个拉杆，衣柜，地毯 |
 
 `/sentiencetest arene <rodeur|sentinelle|flaireur|abomination|toutes>` 可以在任意位置重建竞技场。
+
+!!! tip "实时修改猎手"
+    它的行为树位于 `src/testmod/resources/data/sentience_testmod/sentience/behavior_tree/hunter.json`。
+    修改后在游戏中执行 `/reload` 即可。

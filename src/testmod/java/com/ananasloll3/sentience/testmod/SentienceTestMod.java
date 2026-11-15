@@ -7,6 +7,9 @@ import com.ananasloll3.sentience.api.rules.SentienceRules;
 import com.ananasloll3.sentience.testmod.arena.TestArenas;
 import com.ananasloll3.sentience.testmod.entity.ApexEntity;
 import com.ananasloll3.sentience.testmod.entity.HoundEntity;
+import com.ananasloll3.sentience.testmod.entity.HunterEntity;
+import com.ananasloll3.sentience.api.perception.scent.ScentSense;
+import com.ananasloll3.sentience.api.perception.scent.ScentTrails;
 import com.ananasloll3.sentience.testmod.entity.SentinelEntity;
 import com.ananasloll3.sentience.testmod.entity.StalkerEntity;
 import net.fabricmc.api.ModInitializer;
@@ -70,6 +73,10 @@ public final class SentienceTestMod implements ModInitializer {
     public static final EntityType<ApexEntity> APEX = register("apex",
             EntityType.Builder.create(ApexEntity::new, SpawnGroup.MONSTER).dimensions(0.8f, 2.7f).maxTrackingRange(10));
 
+    /** Comportement entièrement décrit par un Behavior Tree JSON + requêtes d'environnement. */
+    public static final EntityType<HunterEntity> HUNTER = register("hunter",
+            EntityType.Builder.create(HunterEntity::new, SpawnGroup.MONSTER).dimensions(0.6f, 1.95f).maxTrackingRange(10));
+
     public static Identifier id(String path) {
         return Identifier.of(MOD_ID, path);
     }
@@ -80,6 +87,7 @@ public final class SentienceTestMod implements ModInitializer {
         attributes(SENTINEL, SentinelEntity.createAttributes());
         attributes(HOUND, HoundEntity.createAttributes());
         attributes(APEX, ApexEntity.createAttributes());
+        attributes(HUNTER, HunterEntity.createAttributes());
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> EGGS.forEach(entries::add));
 
         // Mob vanilla amélioré sans toucher à son code : les zombies entendent et voient (joueurs et villageois).
@@ -89,6 +97,11 @@ public final class SentienceTestMod implements ModInitializer {
                 .sight(SightConfig.humanoid().withTargets(e -> SightConfig.PLAYERS.test(e) || e instanceof VillagerEntity))
                 .damage()
                 .defaultGoals(3, 1.0, 1.2));
+
+        // Un second modèle pour le même type (comme le ferait un autre mod) : il s'ajoute au premier.
+        // Les zombies sentent en plus le sang des blessés.
+        AgentTemplates.register(EntityType.ZOMBIE, 10, agent -> agent
+                .scent(ScentSense.hound().only(p -> p.kind().equals(ScentTrails.BLOOD))));
 
         CommandRegistrationCallback.EVENT.register((dispatcher, access, env) -> {
             TestWalker.register(dispatcher);

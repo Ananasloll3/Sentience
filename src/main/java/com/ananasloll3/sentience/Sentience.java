@@ -2,6 +2,13 @@ package com.ananasloll3.sentience;
 
 import com.ananasloll3.sentience.api.agent.Agent;
 import com.ananasloll3.sentience.api.agent.AgentTemplates;
+import com.ananasloll3.sentience.api.behavior.BehaviorTrees;
+import com.ananasloll3.sentience.api.behavior.BtRegistry;
+import com.ananasloll3.sentience.api.blackboard.BlackboardKeys;
+import com.ananasloll3.sentience.api.query.EnvQueries;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.resource.SynchronousResourceReloader;
 import com.ananasloll3.sentience.api.perception.DamageSense;
 import com.ananasloll3.sentience.api.perception.PerceptionComponent;
 import com.ananasloll3.sentience.api.perception.hearing.HearingSystem;
@@ -73,6 +80,14 @@ public final class Sentience implements ModInitializer {
             HearingSystem.clearAll();
             ScentTrails.clearAll();
         });
+
+        BlackboardKeys.bootstrap();
+        BtRegistry.bootstrap();
+        ResourceLoader.get(ResourceType.SERVER_DATA).registerReloader(id("behavior"),
+                (SynchronousResourceReloader) manager -> {
+                    EnvQueries.reload(manager);
+                    BehaviorTrees.reload(manager);
+                });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 SentienceCommand.register(dispatcher));

@@ -73,6 +73,9 @@ plugins:
             Odorat: Smell
             Douleur et toucher: Pain and touch
             Communication: Communication
+            Décision: Decision
+            Behavior Trees: Behavior Trees
+            Requêtes d'environnement: Environment queries
             Guides: Guides
             Règles de ton mod: Your mod's rules
             Créer un sens: Create a sense
@@ -102,6 +105,9 @@ plugins:
             Odorat: 嗅觉
             Douleur et toucher: 痛觉与触觉
             Communication: 通信
+            Décision: 决策
+            Behavior Trees: 行为树
+            Requêtes d'environnement: 环境查询
             Guides: 指南
             Règles de ton mod: 你的模组规则
             Créer un sens: 创建感官
@@ -150,6 +156,9 @@ nav:
       - Odorat: sens/odorat.md
       - Douleur et toucher: sens/douleur-toucher.md
       - Communication: sens/communication.md
+  - Décision:
+      - Behavior Trees: decision/behavior-trees.md
+      - Requêtes d'environnement: decision/eqs.md
   - Guides:
       - Règles de ton mod: guides/regles.md
       - Créer un sens: guides/sens-custom.md

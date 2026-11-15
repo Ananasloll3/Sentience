@@ -202,6 +202,14 @@ public final class SightSense implements SenseModule {
         return stack.getItem() instanceof BlockItem item && item.getBlock().getDefaultState().getLuminance() > 0;
     }
 
+    /**
+     * Ligne de vue selon des règles de vue (le verre, les vitres et les barreaux laissent passer le regard).
+     * Utilisé aussi par les requêtes d'environnement.
+     */
+    public static boolean hasLineOfSight(ServerWorld world, Vec3d from, Vec3d to, SightRules rules) {
+        return canSee(world, null, from, to, rules);
+    }
+
     /** Ligne de vue : verre, vitres et barreaux laissent passer le regard, les fluides non. */
     private static boolean canSee(ServerWorld world, MobEntity mob, Vec3d from, Vec3d to, SightRules rules) {
         Boolean blocked = BlockView.raycast(from, to, world, (w, pos) -> {

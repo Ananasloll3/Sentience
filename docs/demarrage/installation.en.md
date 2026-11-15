@@ -30,7 +30,7 @@ Once Sentience is published on CurseForge or Modrinth, those platforms serve it 
     }
 
     dependencies {
-        modImplementation "maven.modrinth:sentience:0.1.0"
+        modImplementation "maven.modrinth:sentience:0.2.0"
     }
     ```
 
@@ -38,7 +38,7 @@ Then declare the dependency in your `fabric.mod.json`:
 
 ```json
 "depends": {
-  "sentience": ">=0.1.0"
+  "sentience": ">=0.2.0"
 }
 ```
 
@@ -55,7 +55,7 @@ cd Sentience
 ```
 
 Then, in your project: `repositories { mavenLocal() }` and
-`modImplementation "com.ananasloll3:sentience:0.1.0"`.
+`modImplementation "com.ananasloll3:sentience:0.2.0"`.
 
 ## Simple Voice Chat (optional)
 

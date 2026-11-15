@@ -19,9 +19,22 @@ public void onInitialize() {
 Les comportements de Sentience s'ajoutent à ceux du mob : un zombie garde son attaque vanilla
 (priorité 2) et utilise « aller voir » (priorité 3) quand il n'a pas de cible.
 
-!!! warning "Un seul modèle par type"
-    Si deux mods enregistrent un modèle pour le même type, le dernier enregistré gagne.
-    Pour tes propres mobs, construis plutôt l'agent dans le mob lui-même.
+## Plusieurs modèles pour un même type
+
+Plusieurs mods peuvent viser le même type : leurs modèles sont **combinés** sur le même agent,
+par priorité croissante (puis dans l'ordre d'enregistrement).
+
+```java
+// Un autre mod ajoute l'odorat aux zombies, sans retirer l'ouïe et la vue
+AgentTemplates.register(EntityType.ZOMBIE, 10, agent -> agent
+        .scent(ScentSense.hound().only(p -> p.kind().equals(ScentTrails.BLOOD))));
+```
+
+- les sens et composants **s'additionnent** ;
+- un sens ou un composant **de même classe** est remplacé par celui du modèle le plus prioritaire ;
+- les règles, l'alerte, les comportements par défaut et le Behavior Tree aussi.
+
+Pour tes propres mobs, construis plutôt l'agent directement dans le mob.
 
 ## Entités sans agent
 
